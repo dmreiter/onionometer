@@ -2,7 +2,7 @@ const fs = require('fs');
 const request = require('request');
 const Promise = require('bluebird');
 
-const MAX_PAGES_OF_HEADLINES = 21;
+const MAX_PAGES_OF_HEADLINES = 27;
 const URL_BASE = (page) => `https://www.cbc.ca/aggregate_api/v1/items?pageSize=1000&page=${page}`;
 
 function num_words(str) {
