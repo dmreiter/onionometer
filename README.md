@@ -13,4 +13,6 @@ I then exported the headlines as vectors from Doc2Vec and split them in to train
 
 Version 1 yields ~71% accuracy.
 
+After cleaning the data a little bit more the model predicts satire with around 76.5% accuracy.
+
 I will update this soon with a more in depth data analysis & will try to increase the accuracy.
