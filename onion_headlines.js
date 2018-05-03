@@ -50,7 +50,7 @@ module.exports = {
 
     async run() {
         console.log('Getting onion headlines')
-        const browser = await puppeteer.launch({ headless: false });
+        const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
     
         await page.setViewport({ height: 960, width: 1270 });
