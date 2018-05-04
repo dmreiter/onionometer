@@ -8,47 +8,29 @@ from random import shuffle
 
 from sklearn.linear_model import LogisticRegression
 
-class LabeledLineSentence:
-    def __init__(self, sources):
-        self.sources = sources
+sentences = []
 
-    def __iter__(self):
-        for source, prefix in self.sources.items():
-            with utils.smart_open(source) as fin:
-                for item_no, line in enumerate(fin):
-                    yield LabeledSentence(utils.to_unicode(line).lower().split(), [prefix + '_%s' % item_no])
-        return self.sentences
+with utils.smart_open('sentences/onion.txt') as file_in:
+    for item_no, line in enumerate(file_in):
+        sentences.append(LabeledSentence(utils.to_unicode(line).lower().split(), ['ONION_' + str(item_no)]))
 
-    def to_array(self):
-        self.sentences = []
-        for source, prefix in self.sources.items():
-            with utils.smart_open(source) as fin:
-                for item_no, line in enumerate(fin):
-                    self.sentences.append(LabeledSentence(utils.to_unicode(line).lower().split(), [prefix + '_%s' % item_no]))
-        return self.sentences
-    
-    def sentences_perm(self):
-        shuffle(self.sentences)
-        return self.sentences
+with utils.smart_open('sentences/real.txt') as file_in:
+    for item_no, line in enumerate(file_in):
+        sentences.append(LabeledSentence(utils.to_unicode(line).lower().split(), ['REAL_' + str(item_no)]))
 
-sources = {'sentences/onion.txt':'ONION', 'sentences/real.txt':'REAL'}
+# model = Doc2Vec.load('./onionometer.d2v')
 
-sentences = LabeledLineSentence(sources)
+model = Doc2Vec(min_count=1, window=5, vector_size=100)
 
-model = Doc2Vec.load('./onionometer.d2v')
+model.build_vocab(sentences)
 
-# model = Doc2Vec(min_count=1, window=5, vector_size=100)
+for epoch in range(20):
+    print('training epoch ' + str(epoch + 1))
+    shuffle(sentences)
+    model.train(sentences, total_examples=model.corpus_count, epochs=20)
 
-# model.build_vocab(sentences.to_array())
+model.save('./onionometer.d2v')
 
-# for epoch in range(10):
-#     model.train(sentences.sentences_perm(), total_examples=model.corpus_count, epochs=10)
-
-# model.save('./onionometer.d2v')
-
-# print(model.most_similar('man'))
-
-# print(model['REAL_10000'])
 
 train_array = np.zeros((30000, 100))
 train_labels = np.zeros(30000)
@@ -77,4 +59,4 @@ classifier.fit(train_array, train_labels)
 
 score = classifier.score(test_array, test_labels)
 
-print(score)
+print("accuracy on test set: " + str(score))
