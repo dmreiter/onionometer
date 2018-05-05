@@ -12,7 +12,6 @@ Using these headlines, I first trained a Doc2Vec model (currently saved as onion
 I then exported the headlines as vectors from Doc2Vec and split them in to train/test groups. My initial split was 30000 train (15000 onion and 15000 real headlines), 8000 test (4000/4000). These were then tossed in to scikit learn's logistic regression classifier.
 
 Version 1 yields ~71% accuracy.
-
-After cleaning the data a little bit more the model predicts satire with around 76.5% accuracy.
+After cleaning the data a little bit more the model predicts satire with around ~80% accuracy.
 
 I will update this soon with a more in depth data analysis & will try to increase the accuracy.
