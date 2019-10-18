@@ -15,3 +15,10 @@ Version 1 yields ~71% accuracy.
 After cleaning the data a little bit more the model predicts satire with around ~80% accuracy.
 
 I will update this soon with a more in depth data analysis & will try to increase the accuracy.
+
+------------------------------------------------------------------------------------------------
+Update:
+
+Now using tensorflow/keras neural network instead of scikit logistic regression.
+Achieved 92% accuracy on test set using a model consisting of a word embedding layer and LSTMs, with Adam/RMSprop optimizer and binary crossentropy loss function.
+
