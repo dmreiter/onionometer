@@ -20,5 +20,5 @@ I will update this soon with a more in depth data analysis & will try to increas
 Update:
 
 Now using tensorflow/keras neural network instead of scikit logistic regression.
-Achieved 92% accuracy on test set using a model consisting of a word embedding layer and LSTMs, with Adam/RMSprop optimizer and binary crossentropy loss function.
+Achieved 91% accuracy on test set using a model consisting of a word embedding layer and LSTMs, with Adam/RMSprop optimizer and binary crossentropy loss function.
 
